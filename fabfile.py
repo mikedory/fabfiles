@@ -16,7 +16,6 @@ Then, commit files, and push to Github
 
 
 # run Django's test framework
-@virtualenv
 def test():
     with settings(warn_only=True):
         result = local('./manage.py test %s' % django_app, capture=True)
@@ -39,7 +38,6 @@ def push():
 
 # run all the pre-flight tests
 def prepare_deploy():
-    minify()
     test()
     commit()
     push()
@@ -65,8 +63,6 @@ And to deploy to a single server:
 
 # drop the code off on the remote server
 def code_deploy(tag=None, branch=None):
-    with run("source ./venv/bin/activate"):
-
         # when deploying by tag
         if tag is not None:
             # define where this is all going
@@ -104,7 +100,6 @@ def code_deploy(tag=None, branch=None):
 
 
 # roll back to a previously deployed tag
-@virtualenv
 def code_rollback(tag=None, branch=None):
     code_deploy_dir = code_dir_root + "/" + tag
     with cd(code_dir_root):
@@ -122,15 +117,6 @@ def supervisor_restart():
     print "*** restarting server ***"
     run("supervisorctl restart %s" % supervisor_app)
 
-
-# ---------------------------------------------------------
-
-def virtualenv():
-    # test to be sure the venv actually exists
-    with settings(warn_only=True):
-        if run("test -d ./venv/bin/activate").failed:
-            run("virtualenv venv --distribute")
-    run("source ./venv/bin/activate")
 
 # ---------------------------------------------------------
 
