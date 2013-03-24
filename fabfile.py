@@ -4,7 +4,7 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 
 # import local_settings.py
-from gifhq.local_settings import *
+from config.local_settings import *
 
 
 """
