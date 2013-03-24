@@ -41,7 +41,7 @@ To deploy a tag:
 
 To deploy a branches:
 
-    fab deploy:branch=master
+    fab prod deploy:branch=master
 
 So to deploy a tag to production, you can run:
 
@@ -54,7 +54,6 @@ And to deploy to a single server:
 
 #### Restarting processes 
 
-You can restart supervisor in a standalone fashion easily:
 
     fab supervisor_restart
 
