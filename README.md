@@ -54,11 +54,13 @@ And to deploy to a single server:
 
 #### Restarting processes 
 
+Restarting services remotely is made a bunch easier via Fabric, and included here is a remote supervisor-restart function:
 
-    fab supervisor_restart
+    fab env restart
+
 
 #### Rolling back
 
 Rolling back to a previously-deployed tag is something one must occasionally do if the impossible event of a bad deploy happens.  No worries tho, it's easy!
 
-    fab rollback:tag=YYYY-MM-DD-tag-description
+    fab env rollback:tag=YYYY-MM-DD-tag-description
