@@ -1,13 +1,13 @@
 Fabfiles
 ========
 
-Because deploying Django apps with Fabric is *fun!*
+Because deploying [Django](https://www.djangoproject.com/) apps with [Fabric](http://docs.fabfile.org/) is *fun!*
 
 
 Installation
 ------------
 
-Because it's *always* a handy way to avoid conflicts, virtualenv is recommended:
+Because it's *always* a handy way to avoid conflicts, [virtualenv](http://www.virtualenv.org/) is recommended:
 
     pip install virtualenv
 
@@ -26,12 +26,28 @@ Use
 
 ### Local
 
+There's a bunch of stuff one might need to do locally, and thankfully, Fabric makes this easy. Most of this focuses on testing and getting ready for a deploy, but more can be easily added to your liking.
+
+
+#### Testing your app
+
+There's a ton of great testing options for Django apps, so stub in your framework of choice.  You can run locally with like so:
+
+    fab test
+
+
 #### Preparing for a deploy
 
-This application assumes you're using Django, so we'll use its test framework to ensure everything is kosher first.  Then, we'll commit everything, and push it up to Github
+As noted, this application assumes you're using Django, so we'll use its test framework to ensure everything is kosher first.  Then, we'll commit everything, and push it up to Github.  The all-in-one command is:
 
+    fab prepare
+
+---
 
 ### Remote
+
+Putting stuff on remote servers and running processes from afar &mdash; the fun part!
+
 
 #### Deploying code
 
