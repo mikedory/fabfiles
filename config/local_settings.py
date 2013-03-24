@@ -9,6 +9,10 @@ code_repo = 'git@gitrepo.com:user/REPO.git'
 # how many hosts you want to handle concurrently
 pool_size = 5
 
+# process names
+django_app = 'appname'
+supervisor_app = 'appname'
+
 
 # remote server configs
 def prod():

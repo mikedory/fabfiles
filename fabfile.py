@@ -17,7 +17,7 @@ This leaves a placeholder for minification as well
 # run Django's test framework
 def test():
     with settings(warn_only=True):
-        result = local('./manage.py test appname', capture=True)
+        result = local('./manage.py test %s' % django_app, capture=True)
     if result.failed and not confirm("Tests failed! D: Continue anyway?"):
         abort("Aborting!")
 
@@ -108,7 +108,7 @@ def code_deploy(tag=None, branch=None):
 def supervisor_restart():
     # restart processes and clean up
     print "*** restarting server ***"
-    run("supervisorctl restart appname")
+    run("supervisorctl restart %s" % supervisor_app)
 
 
 # run the code deploy, then restart the supervisor process
