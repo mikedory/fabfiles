@@ -21,7 +21,12 @@ def prod():
     env.key_filename = '/path/to/.ssh/id_rsa'
 
 
-def staging():
+def stg():
+    env.user = 'username'
+    env.hosts = ['domain.com']
+    env.key_filename = '/path/to/.ssh/id_rsa'
+
+def dev():
     env.user = 'username'
     env.hosts = ['domain.com']
     env.key_filename = '/path/to/.ssh/id_rsa'
