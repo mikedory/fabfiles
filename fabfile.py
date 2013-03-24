@@ -7,6 +7,8 @@ from fabric.contrib.console import confirm
 from config.local_settings import *
 
 
+# ---------------------------------------------------------
+
 """
 Test and prepare everything locally using Django's test framework
 Then, commit files, and push to Github
@@ -14,10 +16,10 @@ Then, commit files, and push to Github
 
 
 # run Django's test framework
+@virtualenv
 def test():
     with settings(warn_only=True):
-        with run("source ./venv/bin/activate"):
-            result = local('./manage.py test %s' % django_app, capture=True)
+        result = local('./manage.py test %s' % django_app, capture=True)
     if result.failed and not confirm("Tests failed! D: Continue anyway?"):
         abort("Aborting!")
 
@@ -42,6 +44,7 @@ def prepare_deploy():
     commit()
     push()
 
+# ---------------------------------------------------------
 
 """
 Deploy to the remote server!
@@ -101,11 +104,11 @@ def code_deploy(tag=None, branch=None):
 
 
 # roll back to a previously deployed tag
+@virtualenv
 def code_rollback(tag=None, branch=None):
     code_deploy_dir = code_dir_root + "/" + tag
-    with run("source ./venv/bin/activate"):
-        with cd(code_dir_root):
-            run("ln -nfs %s %s" % (code_deploy_dir, code_dir_target))
+    with cd(code_dir_root):
+        run("ln -nfs %s %s" % (code_deploy_dir, code_dir_target))
 
 
 def minify():
@@ -115,12 +118,21 @@ def minify():
 
 # restart the supervisor process
 def supervisor_restart():
-    with run("source ./venv/bin/activate"):
+    # restart processes and clean up
+    print "*** restarting server ***"
+    run("supervisorctl restart %s" % supervisor_app)
 
-        # restart processes and clean up
-        print "*** restarting server ***"
-        run("supervisorctl restart %s" % supervisor_app)
 
+# ---------------------------------------------------------
+
+def virtualenv():
+    # test to be sure the venv actually exists
+    with settings(warn_only=True):
+        if run("test -d ./venv/bin/activate").failed:
+            run("virtualenv venv --distribute")
+    run("source ./venv/bin/activate")
+
+# ---------------------------------------------------------
 
 # run the code deploy, then restart the supervisor process
 @parallel(pool_size=pool_size)
