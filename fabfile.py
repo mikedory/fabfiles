@@ -8,7 +8,7 @@ from config.local_settings import *
 
 # import the submodules
 import lib.local as local
-import lib.local as remote
+import lib.remote as remote
 
 
 """
