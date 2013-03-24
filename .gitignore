@@ -1,0 +1,10 @@
+# the usual stuff
+.DS_Store
+*.pyc
+
+# venv things
+bin
+venv
+
+# settings
+local_settings.py
