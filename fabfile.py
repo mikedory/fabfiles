@@ -24,7 +24,7 @@ def test():
 
 
 # run all the pre-flight tests
-def prepare_deploy():
+def prepare():
     local.test()
     local.commit()
     local.push()
