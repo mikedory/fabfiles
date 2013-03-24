@@ -8,9 +8,8 @@ from config.local_settings import *
 
 
 """
-Test and prepare everything locally, commit files, and push to Github
-
-This leaves a placeholder for minification as well
+Test and prepare everything locally using Django's test framework
+Then, commit files, and push to Github
 """
 
 
@@ -35,10 +34,6 @@ def commit():
 def push():
     local("git push origin master")
 
-
-def minify():
-    # this is where one would pack/minify stuff
-    pass
 
 
 # run all the pre-flight tests
@@ -106,6 +101,11 @@ def code_deploy(tag=None, branch=None):
         print "*** code deployed ***"
 
 
+def minify():
+    # this is where one would pack/minify stuff
+    pass
+
+
 # restart the supervisor process
 def supervisor_restart():
     with run("source ./venv/bin/activate"):
@@ -119,4 +119,5 @@ def supervisor_restart():
 @parallel(pool_size=pool_size)
 def deploy(tag=None, branch=None):
     code_deploy(tag, branch)
+    minify()
     supervisor_restart()
