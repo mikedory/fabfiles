@@ -35,7 +35,6 @@ def push():
     local("git push origin master")
 
 
-
 # run all the pre-flight tests
 def prepare_deploy():
     minify()
@@ -101,6 +100,14 @@ def code_deploy(tag=None, branch=None):
         print "*** code deployed ***"
 
 
+# roll back to a previously deployed tag
+def code_rollback(tag=None, branch=None):
+    code_deploy_dir = code_dir_root + "/" + tag
+    with run("source ./venv/bin/activate"):
+        with cd(code_dir_root):
+            run("ln -nfs %s %s" % (code_deploy_dir, code_dir_target))
+
+
 def minify():
     # this is where one would pack/minify stuff
     pass
@@ -120,4 +127,11 @@ def supervisor_restart():
 def deploy(tag=None, branch=None):
     code_deploy(tag, branch)
     minify()
+    supervisor_restart()
+
+
+# roll back to a specific tag
+@parallel(pool_size=pool_size)
+def rollback(tag=None):
+    code_rollback(tag)
     supervisor_restart()
