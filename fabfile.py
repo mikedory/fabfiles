@@ -24,10 +24,13 @@ def test():
 
 
 # run all the pre-flight tests
-def prepare():
-    local.test()
-    local.commit()
-    local.push()
+def prepare(test=True, commit=True, push=True):
+    if test is True:
+        local.test()
+    if commit is True:
+        local.commit()
+    if push is True:
+        local.push()
 
 
 """
