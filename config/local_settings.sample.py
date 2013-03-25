@@ -14,6 +14,15 @@ pool_size = 5
 django_app = 'appname'
 supervisor_app = 'appname'
 
+# defaults for local fab actions
+test_default = True
+commit_default = True
+push_default = True
+
+# defaults for remote fab actions
+supervisor_default = True
+virtualenv_default = True
+
 
 # remote server configs
 def prod():

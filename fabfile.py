@@ -1,7 +1,6 @@
 # import the fabric requirements
 from __future__ import with_statement
 from fabric.api import *
-from fabric.contrib.console import confirm
 
 # import local_settings.py
 from config.local_settings import *
@@ -24,7 +23,7 @@ def test():
 
 
 # run all the pre-flight tests
-def prepare(test=True, commit=True, push=True):
+def prepare(test=test_default, commit=commit_default, push=push_default):
     if test is True:
         local.test()
     if commit is True:
@@ -52,7 +51,7 @@ And to deploy to a single server:
 
 # run the code deploy, then restart the supervisor process
 @parallel(pool_size=pool_size)
-def deploy(tag=None, branch=None, supervisor_restart=True):
+def deploy(tag=None, branch=None, supervisor_restart=supervisor_default):
     with hide('stdout', 'stderr'):
         remote.code_deploy(tag, branch)
     remote.minify()
@@ -62,7 +61,7 @@ def deploy(tag=None, branch=None, supervisor_restart=True):
 
 # roll back to a specific tag
 @parallel(pool_size=pool_size)
-def rollback(tag=None, supervisor_restart=True):
+def rollback(tag=None, supervisor_restart=supervisor_default):
     remote.code_rollback(tag)
     if supervisor_restart is True:
         remote.supervisor_restart()
@@ -70,7 +69,7 @@ def rollback(tag=None, supervisor_restart=True):
 
 # roll back to a specific tag
 @parallel(pool_size=pool_size)
-def restart(virtualenv=True):
+def restart(virtualenv=virtualenv_default):
     if virtualenv is True:
         with hide('stdout', 'stderr'):
             remote.virtualenv_check()
