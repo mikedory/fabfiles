@@ -50,7 +50,8 @@ And to deploy to a single server:
 # run the code deploy, then restart the supervisor process
 @parallel(pool_size=pool_size)
 def deploy(tag=None, branch=None):
-    remote.code_deploy(tag, branch)
+    with hide('stdout', 'stderr'):
+        remote.code_deploy(tag, branch)
     remote.minify()
     remote.supervisor_restart()
 
@@ -65,9 +66,9 @@ def rollback(tag=None):
 # roll back to a specific tag
 @parallel(pool_size=pool_size)
 def restart():
-
-    remote.virtualenv_check()
-    remote.virtualenv_activate()
+    with hide('stdout', 'stderr'):
+        remote.virtualenv_check()
+        remote.virtualenv_activate()
     remote.supervisor_restart()
 
 
