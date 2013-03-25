@@ -44,7 +44,7 @@ def code_deploy(tag=None, branch=None):
         # make the directory, deploy the code, and symlink it
         run('mkdir -p %s' % code_deploy_dir)
         with cd(code_dir_root):
-            run("git clone %s %s" % (code_repo, code_deploy_dir))
+            run("git clone --depth 1 %s %s" % (code_repo, code_deploy_dir))
         with cd(code_deploy_dir):
             run("git checkout %s" % tag)
         with cd(code_dir_root):
@@ -62,7 +62,7 @@ def code_deploy(tag=None, branch=None):
         # fetch, checkout, and merge the target branch
         with cd(code_dir_target):
             run("git fetch")
-            run("git checkout %s" % branch)
+            run("git checkout --depth 1 %s" % branch)
             run("git merge origin/%s" % branch)
 
     # gotta have one or the other!
