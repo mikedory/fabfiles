@@ -89,3 +89,9 @@ Restarting services remotely is made a bunch easier via Fabric, and included her
 Rolling back to a previously-deployed tag is something one must occasionally do if the impossible event of a bad deploy happens.  No worries tho, it's easy!
 
     fab env rollback:tag=YYYY-MM-DD-tag-description
+
+
+About
+-----
+
+This app was assembled by [Mike Dory](https://github.com/mikedory), based on [Jeff Forcier](https://github.com/bitprophet/)'s amazing [Fabric](http://fabfile.org) library. Contributions/edits are always welcome, naturally.
