@@ -10,8 +10,8 @@ from config.local_settings import *
 # run Django's test framework
 def test():
     with settings(warn_only=True):
-        result = local('./manage.py test %s' % django_app, capture=True)
-    if result.failed and not confirm("Tests failed! D: Continue anyway?"):
+        django_test = local('./manage.py test %s' % django_app, capture=True)
+    if django_test.failed and not confirm("Tests failed! D: Continue anyway?"):
         abort("Aborting!")
 
 
