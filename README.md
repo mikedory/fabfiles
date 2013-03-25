@@ -76,6 +76,10 @@ And to deploy to a single server:
 
     fab -u username -H domain.com -i /path/to/.ssh/id_rsa deploy:tag=YYYY-MM-DD-tag-description
 
+If if you don't want to execute Supervisor restarts (or if Virtualenv isn't your particular cup of tea), you can override both methods in most cases.  For example, to deploy without restarting Supervisor, run:
+
+    fab prod deploy:tag=YYYY-MM-DD-tag-description,supervisor_restart=False
+
 
 #### Restarting processes 
 
