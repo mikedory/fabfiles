@@ -65,4 +65,15 @@ def rollback(tag=None):
 # roll back to a specific tag
 @parallel(pool_size=pool_size)
 def restart():
+
+    remote.virtualenv_check()
+    remote.virtualenv_activate()
     remote.supervisor_restart()
+
+
+# set up the environment for deploys
+@parallel(pool_size=pool_size)
+def virtualenv_setup():
+    # make sure virtualenv is up and ready
+    remote.virtualenv_check()
+    remote.virtualenv_activate()
