@@ -46,7 +46,7 @@ As noted, this application assumes you're using Django, so we'll use its test fr
 
 ### Remote
 
-Putting stuff on remote servers and running processes from afar &mdash; the fun part!
+Putting stuff on remote servers and running processes from afar &mdash; the fun part!  This is written assuming you're using [Supervisor](http://supervisord.org/) to control your processes ([Gunicorn](http://gunicorn.org/), [Tornado](http://www.tornadoweb.org/), etc.), though that's easily swap-out-able.
 
 
 #### Deploying code
