@@ -7,18 +7,27 @@ Because deploying [Django](https://www.djangoproject.com/) apps with [Fabric](ht
 Installation
 ------------
 
-Because it's *always* a handy way to avoid conflicts, [virtualenv](http://www.virtualenv.org/) is recommended:
+First off, you want the source, right?  If you didn't already clone this repo, you can easily drop it off in your local dir like so:
+
+    curl -L 'https://github.com/mikedory/fabfiles/tarball/master' | tar zx && mv mikedory-fabfiles-* fabfiles
+
+Because it's *always* a handy way to avoid conflicts, [virtualenv](http://www.virtualenv.org/) is recommended for managing dependencies and Python versions:
 
     pip install virtualenv
 
-Then set up a virtualenv for the app, and activate it:
+Then set up a virtualenv for the app, and activate it (you can turn it off later by running `deactivate`):
 
     virtualenv venv --distribute && source ./venv/bin/activate 
-    # run "deactivate" to turn it off
 
 Then to get the dependencies for this application, install the remaining requirements via Pip:
 
     pip install -r requirements.txt
+
+Make a `local_settings.sample.py` called `local_settings.py`, and edit the environment variables accordingly:
+
+    cp config/local_settings.sample.py config/local_settings.py
+
+That it! You're all set to deploy things!
 
 
 Use
