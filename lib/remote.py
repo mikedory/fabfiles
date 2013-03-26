@@ -57,12 +57,12 @@ def code_deploy(tag=None, branch=None):
         # test to make sure the repo exists
         with settings(warn_only=True):
             if run("test -d %s" % code_dir_target).failed:
-                run("git clone %s %s" % (code_repo, code_dir_target))
+                run("git clone --depth 1 %s %s" % (code_repo, code_dir_target))
 
         # fetch, checkout, and merge the target branch
         with cd(code_dir_target):
             run("git fetch")
-            run("git checkout --depth 1 %s" % branch)
+            run("git checkout %s" % branch)
             run("git merge origin/%s" % branch)
 
     # gotta have one or the other!
