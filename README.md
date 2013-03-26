@@ -36,7 +36,7 @@ That's okay too!  Just run this one-liner after installing:
 
     echo '#!/bin/bash \nfab -f fabfiles/fabfile.py "$@"' >> fab && chmod +x fab
 
-You can now run all the commands from your home directory with `./fab` and never need to worry about what's under the hood except for the local_settings options.
+You can now run all the commands from your app's root directory with `./fab` and never need to worry about what's under the hood except for the local_settings options.
 
 
 Use
